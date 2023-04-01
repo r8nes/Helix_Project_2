@@ -199,7 +199,7 @@ Material:
     - _GlossyReflections: 1
     - _GoochRampIntensity: 0.5
     - _HatchingMapScale: -0.5
-    - _IndirectFade: 0.05
+    - _IndirectFade: 0.124
     - _Initialized: 1
     - _InputTab: 1
     - _Iridescence: 0
@@ -237,7 +237,7 @@ Material:
     - _RimThresholdOffset: 0.25
     - _Roughness: 0.5
     - _Saturation: 1
-    - _SketchMapScale: 0.7
+    - _SketchMapScale: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
