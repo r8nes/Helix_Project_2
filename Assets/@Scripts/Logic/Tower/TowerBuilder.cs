@@ -7,7 +7,6 @@ namespace Helix.Logic.Towers
     {
         [SerializeField] private int _levelCount;
         [SerializeField] private float _additionalScale;
-        [SerializeField] private GameObject _cylinder;
 
         [Header("Platforms")]
         [Space]
@@ -17,27 +16,34 @@ namespace Helix.Logic.Towers
 
         private float _startAndFinishAdditionalScale = 0.5f;
 
+        private GameObject _cylinder;
+
         public float CylinderScaleY => _levelCount / 2f + _startAndFinishAdditionalScale + _additionalScale / 2f;
 
-        private void Awake() => Build();
+        public void Construct(GameObject cylinder) 
+        {
+            _cylinder = cylinder;
+            _cylinder.transform.SetParent(transform);
+
+            Build();
+        }
 
         private void Build()
         {
-            GameObject cylinder = Instantiate(_cylinder, transform);
-            cylinder.transform.localScale = new Vector3(1, CylinderScaleY, 1);
+            _cylinder.transform.localScale = new Vector3(1, CylinderScaleY, 1);
 
-            Vector3 spawnPosition = cylinder.transform.position;
-            spawnPosition.y += cylinder.transform.localScale.y - _additionalScale;
+            Vector3 spawnPosition = _cylinder.transform.position;
+            spawnPosition.y += _cylinder.transform.localScale.y - _additionalScale;
 
-            SpawnPlatform(_startPlatform, ref spawnPosition, cylinder.transform);
+            SpawnPlatform(_startPlatform, ref spawnPosition, _cylinder.transform);
 
             for (int i = 0; i < _levelCount; i++)
             {
                 SpawnPlatform(
-                    _platform[Random.Range(0, _platform.Length)], ref spawnPosition, cylinder.transform);
+                    _platform[Random.Range(0, _platform.Length)], ref spawnPosition, _cylinder.transform);
             }
 
-            SpawnPlatform(_finishPlatform, ref spawnPosition, cylinder.transform);
+            SpawnPlatform(_finishPlatform, ref spawnPosition, _cylinder.transform);
         }
 
         private void SpawnPlatform(Platform platform, ref Vector3 spawnPosition, Transform parent)

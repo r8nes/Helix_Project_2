@@ -36,6 +36,6 @@ namespace Helix.State
             InitTower();
         }
 
-        private GameObject InitTower() => _gameFactory.CreatePlayer(Vector2.zero);
+        private GameObject InitTower() => _gameFactory.CreatTower(Vector2.zero);
     }
 }

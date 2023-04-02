@@ -1,5 +1,6 @@
 ﻿using Defender.Assets;
 using Helix.Assets;
+using Helix.Logic.Towers;
 using UnityEngine;
 
 namespace Helix.Factory
@@ -15,11 +16,20 @@ namespace Helix.Factory
             _assets = assets;
         }
 
-        public GameObject CreatePlayer(Vector2 initialPoint)
+        public GameObject CreatTower(Vector2 initialPoint)
         {
-            PlayerGameObject = AddGameObject(AssetsPath.PLAYER_PATH, initialPoint);
+            GameObject cylinder = CreateCylinder();
+
+            PlayerGameObject = AddGameObject(AssetsPath.TOWER_PATH, initialPoint);
+            PlayerGameObject.GetComponent<TowerBuilder>().Construct(cylinder);
 
             return PlayerGameObject;
+        }
+
+        private GameObject CreateCylinder() 
+        {
+            GameObject cylinder = AddGameObject(AssetsPath.BASE_CYLINDER_PATH);
+            return cylinder;
         }
 
         private GameObject AddGameObject(string prefabPath, Vector2 at)
