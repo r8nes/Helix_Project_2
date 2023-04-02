@@ -1,4 +1,4 @@
-namespace Defender.Assets
+namespace Helix.Assets
 {
     public static class AssetsPath
     {
